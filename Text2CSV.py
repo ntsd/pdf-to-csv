@@ -11,7 +11,7 @@ class TextToCsv:
         if texts is None:
             texts = self.raw_texts
         if column is None:
-            column = self.get_max_col()
+            column = self.get_max_col(texts)
         for row in texts.split("\n"):
             cols = row.split()
             if len(cols) == column:
