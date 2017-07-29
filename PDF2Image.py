@@ -1,3 +1,5 @@
+# not done
+
 import PyPDF2
 
 from PIL import Image
@@ -24,14 +26,15 @@ def recurse(page, xObject):
             print("page:"+str(page), "Decode:"+xObject[obj]['/Filter'], "color:",xObject[obj]['/ColorSpace'])
 
             if xObject[obj]['/Filter'] == '/FlateDecode':
+                print(len(data), size)
                 img = Image.frombytes(mode, size, data)
-                img.save(imagename + ".png")
+                img.save("tmp/"+imagename + ".png")
             elif xObject[obj]['/Filter'] == '/DCTDecode':
-                img = open(imagename + ".jpg", "wb")
+                img = open("tmp/"+imagename + ".jpg", "wb")
                 img.write(data)
                 img.close()
             elif xObject[obj]['/Filter'] == '/JPXDecode':
-                img = open(imagename + ".jp2", "wb")
+                img = open("tmp/"+imagename + ".jp2", "wb")
                 img.write(data)
                 img.close()
         else:
