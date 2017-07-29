@@ -12,5 +12,5 @@ if __name__ == "__main__":
         text = ImageOCR.image_to_string(im_out)
         text_to_csv.extract_by_col(texts=text, column=col)
 
-    print(text_to_csv.csv_text_lists)
+    # print(text_to_csv.csv_text_lists)
     text_to_csv.save()

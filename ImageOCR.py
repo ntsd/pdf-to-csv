@@ -1,12 +1,18 @@
 import difflib
+import os
 
 import pytesseract
 from PIL import Image, ImageEnhance, ImageFilter
 
 import codecs
 
-pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract'
-
+#  find Tesseract-OCR path
+if os.path.isdir('C:/Program Files (x86)/Tesseract-OCR'):
+    pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract'
+elif os.path.isdir('C:/Program Files/Tesseract-OCR'):
+    pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract'
+else:
+    print("You need to install Tesseract-OCR")
 
 def check_diff(texts1, texts2): # use for check differ of 2 string
     print("\n---------check diff ----------")
