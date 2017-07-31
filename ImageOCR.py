@@ -36,8 +36,8 @@ def preprocess(url):
     im = im.filter(ImageFilter.MedianFilter())
     enhancer = ImageEnhance.Contrast(im)
     im = enhancer.enhance(1)
-    #im = im.convert('1')
-    im.save('tmp/temp.jpg')
+    # im = im.convert('1')
+    # im.save('temp.jpg')
     return im
 
 
