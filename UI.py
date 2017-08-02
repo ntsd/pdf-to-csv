@@ -66,11 +66,13 @@ class MyFrame(Frame):
         # self.imageLabel = Label(self, width=25, heigh=25) # 280/198
         # self.imageLabel.grid(row=2, column=0, columnspan=2, sticky=E+W)
 
-
-
         # TextToImage
         self.text_to_csv = TextToCsv()
         self.text_to_csv.path = "output.csv"
+
+        # if tmp doesn't exist create folder
+        if not os.path.exists("tmp"):
+            os.makedirs("tmp")
 
     def load_file(self):
         fname = askopenfilename(filetypes=(("PDF files", "*.pdf"),
