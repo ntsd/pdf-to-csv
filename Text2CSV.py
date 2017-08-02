@@ -6,23 +6,47 @@ class TextToCsv:
     raw_texts = ""
     path = "output.csv"
     csv_text_lists = []
+    col_range_start = 0
+    col_range_end = 10
 
-    def extract_by_col(self, texts=None, column=None):
-        if texts is None:
-            texts = self.raw_texts
-        if column is None:
-            column = self.get_max_col(texts)
+    def extract(self, texts=None):
         for row in texts.split("\n"):
             cols = row.split()
-            if len(cols) == column:
-                self.csv_text_lists.append(cols)
+            self.csv_text_lists.append(cols)
 
-    def save(self, path=None):
+    def extract_by_col(self, texts=None, column=None, col_range_start=None, col_range_end=None):
+        if texts is None:
+            texts = self.raw_texts
+        if col_range_start and col_range_end:
+            for row in texts.split("\n"):
+                cols = row.split()
+                if len(cols) in range(col_range_start, col_range_end+1):
+                    self.csv_text_lists.append(cols)
+        else:
+            if column is None:
+                column = self.get_max_col(texts)
+            for row in texts.split("\n"):
+                cols = row.split()
+                if len(cols) == column:
+                    self.csv_text_lists.append(cols)
+
+    def filter_by_col_range(self, col_range_start=None, col_range_end=None, text_list=None):
+        if text_list is None:
+            text_list = self.csv_text_lists
+        text_list_in_range = []
+        for text_line in text_list:
+            if len(text_line) in range(col_range_start, col_range_end+1):
+                text_list_in_range.append(text_line)
+        return text_list_in_range
+
+    def save(self, path=None, text_lists=None):
         if path is None:
             path = self.path
+        if text_lists is None:
+            text_lists = self.csv_text_lists
         with open(path, 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=',')
-            for row in self.csv_text_lists:
+            for row in text_lists:
                 writer.writerow(row)
 
     def clear_list(self):

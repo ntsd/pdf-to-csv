@@ -3,6 +3,8 @@ pdf-to-csv
 
 Python version 3.5+ 
 
+[ImageMagick](https://www.imagemagick.org/script/index.php)
+
 [Tesseract-OCR](https://github.com/tesseract-ocr/tesseract/wiki)
 
 `install to C:/Program Files (x86)/Tesseract-OCR`
